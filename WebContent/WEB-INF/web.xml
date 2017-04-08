@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="starter" version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+<!-- Spring的核心监听器 -->
+<listener>
+    <!--Ctrl+shift+T  即可查询到ContextLoaderListener完整路径 -->
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+
+<context-param>
+	<!-- 查询ContextLoaderListener父类ContextLoader源代码CONFIG_LOCATION_PARAM的值 -->
+	<param-name>contextConfigLocation</param-name>
+	<param-value>classpath:applicationContext.xml</param-value>
+</context-param>
+
+
+<!-- 配置struts2的核心过滤器 -->
+    <filter>
+    	<!-- 名字随意起 -->
+        <filter-name>Struts2Filter</filter-name>
+        <!-- struts2-core-x.x.x.jar下org.apache.struts2.dispatcher.filter包下
+        		 StrutsPrepareAndExecuteFilter核心过滤器类文件的路径  	
+        		 
+        	Ctrl+shift+T  即可查询到StrutsPrepareAndExecuteFilter完整路径 -->
+        <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
+
+<!-- 配置拦截器的映射文件，让Strut2的核心Filter拦截所有请求 -->
+    <filter-mapping>
+    	<!-- 名字要与上面配置的核心过滤器名字一致 -->
+        <filter-name>Struts2Filter</filter-name>
+        <!-- 默认过滤所有请求 -->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>
